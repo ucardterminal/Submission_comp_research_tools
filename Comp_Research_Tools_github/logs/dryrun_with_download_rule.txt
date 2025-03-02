@@ -1,0 +1,85 @@
+(smk) julian@Iphoneultra:~/Comp_Research_Tools$ snakemake -n
+host: Iphoneultra
+Building DAG of jobs...
+Job stats:
+job                  count
+-----------------  -------
+all                      1
+cleanup_files            1
+create_tree              1
+download_tax_dump        1
+transform_ranks          1
+tree_indices             1
+total                    6
+
+
+[Sun Mar  2 15:44:48 2025]
+rule download_tax_dump:
+    output: evo_data/nodes.dmp, evo_data/names.dmp
+    jobid: 2
+    reason: Missing output files: evo_data/names.dmp, evo_data/nodes.dmp
+    resources: tmpdir=<TBD>
+
+
+[Sun Mar  2 15:44:48 2025]
+rule cleanup_files:
+    input: evo_data/species.txt
+    output: evo_data/results/species_cleaned.txt
+    jobid: 3
+    reason: Missing output files: evo_data/results/species_cleaned.txt
+    resources: tmpdir=<TBD>
+
+
+[Sun Mar  2 15:44:48 2025]
+rule transform_ranks:
+    input: evo_data/ranks_from_ncbi.tsv, evo_data/nodes.dmp
+    output: evo_data/results/ncbi_rank_dict.tsv, evo_data/results/nodes_copy.tsv
+    jobid: 1
+    reason: Missing output files: evo_data/results/nodes_copy.tsv, evo_data/results/ncbi_rank_dict.tsv; Input files updated by another job: evo_data/nodes.dmp
+    resources: tmpdir=<TBD>
+
+
+[Sun Mar  2 15:44:48 2025]
+rule create_tree:
+    input: evo_data/results/nodes_copy.tsv
+    output: evo_data/results/ncbitree.pickle
+    jobid: 5
+    reason: Missing output files: evo_data/results/ncbitree.pickle; Input files updated by another job: evo_data/results/nodes_copy.tsv
+    resources: tmpdir=<TBD>
+
+
+[Sun Mar  2 15:44:48 2025]
+rule tree_indices:
+    input: evo_data/results/ncbitree.pickle, evo_data/results/species_cleaned.txt, evo_data/species_EnsemblVertebrates.txt, evo_data/nodes_copy.tsv, evo_data/names.dmp
+    output: evo_data/results/index_genomes_df.tsv, evo_data/results/nodes_sum_table.tsv
+    jobid: 4
+    reason: Missing output files: evo_data/results/index_genomes_df.tsv; Input files updated by another job: evo_data/results/ncbitree.pickle, evo_data/results/species_cleaned.txt, evo_data/names.dmp
+    resources: tmpdir=<TBD>
+
+
+[Sun Mar  2 15:44:48 2025]
+rule all:
+    input: evo_data/results/nodes_copy.tsv, evo_data/results/ncbi_rank_dict.tsv, evo_data/results/species_cleaned.txt, evo_data/results/index_genomes_df.tsv, evo_data/results/ncbitree.pickle
+    jobid: 0
+    reason: Input files updated by another job: evo_data/results/nodes_copy.tsv, evo_data/results/ncbitree.pickle, evo_data/results/index_genomes_df.tsv, evo_data/results/ncbi_rank_dict.tsv, evo_data/results/species_cleaned.txt
+    resources: tmpdir=<TBD>
+
+Job stats:
+job                  count
+-----------------  -------
+all                      1
+cleanup_files            1
+create_tree              1
+download_tax_dump        1
+transform_ranks          1
+tree_indices             1
+total                    6
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        all, create_tree, transform_ranks, tree_indices
+    output files have to be generated:
+        cleanup_files, create_tree, download_tax_dump, transform_ranks, tree_indices
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.

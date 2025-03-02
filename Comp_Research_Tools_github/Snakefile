@@ -1,0 +1,63 @@
+link = 'https://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz'
+
+rule all:
+    input:
+        "evo_data/results/nodes_copy.tsv",
+        "evo_data/results/ncbi_rank_dict.tsv",
+        "evo_data/results/species_cleaned.txt",
+        "evo_data/results/index_genomes_df.tsv",
+        "evo_data/results/ncbitree.pickle"
+
+rule download_tax_dump:
+    output:
+        "evo_data/nodes.dmp",
+        "evo_data/names.dmp"
+    params:
+        link=link 
+    shell:
+        '''
+        mkdir -p evo_data
+        cd evo_data
+        wget {params.link} -O taxdump.tar.gz
+        tar -xvf taxdump.tar.gz nodes.dmp names.dmp
+        rm taxdump.tar.gz
+        '''
+
+rule transform_ranks:
+    input:
+        ranks='evo_data/ranks_from_ncbi.tsv',
+        nodes="evo_data/nodes.dmp"
+    output:
+        rank="evo_data/results/ncbi_rank_dict.tsv",
+        node="evo_data/results/nodes_copy.tsv"
+    shell:
+        "python evo_programs/transform_ranks.py --input1 {input.ranks} --input2 {input.nodes} --output1 {output.rank} --output2 {output.node}"
+
+rule create_tree:
+    input:
+        "evo_data/results/nodes_copy.tsv"
+    output:
+        "evo_data/results/ncbitree.pickle"
+    shell:
+        "python evo_programs/taxonomy_smalltree.py --input {input} --output {output}"
+
+rule cleanup_files:
+    input:
+        "evo_data/species.txt"
+    output:
+        "evo_data/results/species_cleaned.txt"
+    shell:
+        "python evo_programs/cleanup_species.py --file_to_be_cleaned {input} --cleaned_file {output}"
+
+rule tree_indices:
+    input:
+        tree ="evo_data/results/ncbitree.pickle",
+        species ="evo_data/results/species_cleaned.txt",
+        vertebrates ="evo_data/species_EnsemblVertebrates.txt",
+        nodes ="evo_data/results/nodes_copy.tsv",
+        names ="evo_data/names.dmp"
+    output:
+        index_genomes ="evo_data/results/index_genomes_df.tsv",
+        sum_table ="evo_data/results/nodes_sum_table.tsv"
+    shell:
+        "python evo_programs/tree_indices.py --tree {input.tree} --EnsemblVertebrates {input.vertebrates} --species_cleaned {input.species} --nodes {input.nodes} --names {input.names} --index_genomes {output.index_genomes} --summed_nodes {output.sum_table}"

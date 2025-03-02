@@ -1,0 +1,855 @@
+(smk) julian@Iphoneultra:~/Comp_Research_Tools$ snakemake
+Assuming unrestricted shared filesystem usage.
+host: Iphoneultra
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 16
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+all                    1
+cleanup_files          1
+create_tree            1
+transform_ranks        1
+tree_indices           1
+total                  5
+
+Select jobs to execute...
+Execute 2 jobs...
+
+[Sun Mar  2 16:09:58 2025]
+localrule transform_ranks:
+    input: evo_data/ranks_from_ncbi.tsv, evo_data/nodes.dmp
+    output: evo_data/results/ncbi_rank_dict.tsv, evo_data/results/nodes_copy.tsv
+    jobid: 1
+    reason: Missing output files: evo_data/results/nodes_copy.tsv, evo_data/results/ncbi_rank_dict.tsv
+    resources: tmpdir=/tmp
+
+
+[Sun Mar  2 16:09:58 2025]
+localrule cleanup_files:
+    input: evo_data/species.txt
+    output: evo_data/results/species_cleaned.txt
+    jobid: 3
+    reason: Missing output files: evo_data/results/species_cleaned.txt
+    resources: tmpdir=/tmp
+
+0: no rank
+1: superkingdom
+2: kingdom
+3: subkingdom
+4: superphylum
+5: subphylum
+6: phylum
+7: clade
+8: superclass
+9: class
+10: subclass
+11: infraclass
+12: cohort
+13: subcohort
+14: superorder
+15: order
+16: suborder
+17: infraorder
+18: parvorder
+19: superfamily
+20: family
+21: subfamily
+22: genus
+23: subgenus
+24: species group
+25: species subgroup
+26: species
+27: subspecies
+28: tribe
+29: subtribe
+30: forma
+31: varietas
+32: strain
+33: section
+34: subsection
+35: pathogroup
+36: subvariety
+37: genotype
+38: serotype
+39: isolate
+40: morph
+41: series
+42: forma specialis
+43: serogroup
+44: biotype
+All characters are in UTF-8 format
+cleaned file saved as species_cleaned.txt 'species_cleaned.txt'
+[Sun Mar  2 16:09:59 2025]
+Finished job 3.
+1 of 5 steps (20%) done
+[Sun Mar  2 16:10:03 2025]
+Finished job 1.
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Mar  2 16:10:03 2025]
+localrule create_tree:
+    input: evo_data/results/nodes_copy.tsv
+    output: evo_data/results/ncbitree.pickle
+    jobid: 5
+    reason: Missing output files: evo_data/results/ncbitree.pickle; Input files updated by another job: evo_data/results/nodes_copy.tsv
+    resources: tmpdir=/tmp
+
+    node_id  parent_id  rank
+0         1          1     0
+1         2     131567     1
+2      2157     131567     1
+3      2759     131567     1
+4     10239          1     1
+5     10472      10239    20
+6     10474      10239    20
+7     10556      10239    22
+8     12333      10239     0
+9     12429      10239     0
+10    12877      10239     7
+11    12908    2787823     0
+12    28384    2787854     0
+13   131567          1     0
+14   185751      10239    20
+15   185752      10239    20
+16   186616      10239     0
+17   292638      10239    20
+18   324686      10239    20
+19   423358      10239    20
+20   451344      10239     0
+21   552364      10239     0
+22   573053      10239    20
+23   687329      10239    20
+24  1232647      10239    22
+25  1232737      10239    20
+26  1458186      10239    20
+27  1511855      10239    20
+28  1993640      10239    20
+29  2080735      10239     7
+30  2169572      10239    20
+31  2559587      10239     7
+32  2560062      10239    20
+33  2731341      10239     7
+34  2731342      10239     7
+35  2732004      10239     7
+36  2732902      10239    20
+37  2732903      10239    20
+38  2787823          1     0
+39  2787854          1     0
+40  2840022      10239     7
+41  2840056      10239     9
+42  2842242      10239     7
+43  2946196      10239    20
+44  3044460      10239    20
+45  3044461      10239    20
+46  3044467      10239    20
+47  3044475      10239    20
+    node_id  parent_id  rank
+0         1          1     0
+4     10239          1     1
+13   131567          1     0
+38  2787823          1     0
+39  2787854          1     0
+5     10472      10239    20
+6     10474      10239    20
+7     10556      10239    22
+8     12333      10239     0
+9     12429      10239     0
+10    12877      10239     7
+14   185751      10239    20
+15   185752      10239    20
+16   186616      10239     0
+17   292638      10239    20
+18   324686      10239    20
+19   423358      10239    20
+20   451344      10239     0
+21   552364      10239     0
+22   573053      10239    20
+23   687329      10239    20
+24  1232647      10239    22
+25  1232737      10239    20
+26  1458186      10239    20
+27  1511855      10239    20
+28  1993640      10239    20
+29  2080735      10239     7
+30  2169572      10239    20
+31  2559587      10239     7
+32  2560062      10239    20
+33  2731341      10239     7
+34  2731342      10239     7
+35  2732004      10239     7
+36  2732902      10239    20
+37  2732903      10239    20
+40  2840022      10239     7
+41  2840056      10239     9
+42  2842242      10239     7
+43  2946196      10239    20
+44  3044460      10239    20
+45  3044461      10239    20
+46  3044467      10239    20
+47  3044475      10239    20
+1         2     131567     1
+2      2157     131567     1
+3      2759     131567     1
+11    12908    2787823     0
+12    28384    2787854     0
+sorted_child_df
+    node_id  parent_id  rank  path
+0         1          1     0    -1
+4     10239          1     1    -1
+13   131567          1     0    -1
+38  2787823          1     0    -1
+39  2787854          1     0    -1
+5     10472      10239    20    -1
+6     10474      10239    20    -1
+7     10556      10239    22    -1
+8     12333      10239     0    -1
+9     12429      10239     0    -1
+10    12877      10239     7    -1
+14   185751      10239    20    -1
+15   185752      10239    20    -1
+16   186616      10239     0    -1
+17   292638      10239    20    -1
+18   324686      10239    20    -1
+19   423358      10239    20    -1
+20   451344      10239     0    -1
+21   552364      10239     0    -1
+22   573053      10239    20    -1
+23   687329      10239    20    -1
+24  1232647      10239    22    -1
+25  1232737      10239    20    -1
+26  1458186      10239    20    -1
+27  1511855      10239    20    -1
+28  1993640      10239    20    -1
+29  2080735      10239     7    -1
+30  2169572      10239    20    -1
+31  2559587      10239     7    -1
+32  2560062      10239    20    -1
+33  2731341      10239     7    -1
+34  2731342      10239     7    -1
+35  2732004      10239     7    -1
+36  2732902      10239    20    -1
+37  2732903      10239    20    -1
+40  2840022      10239     7    -1
+41  2840056      10239     9    -1
+42  2842242      10239     7    -1
+43  2946196      10239    20    -1
+44  3044460      10239    20    -1
+45  3044461      10239    20    -1
+46  3044467      10239    20    -1
+47  3044475      10239    20    -1
+1         2     131567     1    -1
+2      2157     131567     1    -1
+3      2759     131567     1    -1
+11    12908    2787823     0    -1
+12    28384    2787854     0    -1
+0.2849409580230713
+/home/julian/Comp_Research_Tools/evo_programs/taxonomy_smalltree.py:69: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '1' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  df.at[index, 'path'] = path_str  # Setze den Pfad-String in der entsprechenden Zeile
+0.2856016159057617
+0.2858414649963379
+0.2860574722290039
+0.28627872467041016
+0.28657054901123047
+0.28683018684387207
+0.2872600555419922
+0.28755784034729004
+0.2878410816192627
+0.28809595108032227
+0.2883620262145996
+0.28861451148986816
+0.2888815402984619
+0.2891271114349365
+0.28937840461730957
+0.28963518142700195
+0.28988218307495117
+0.29012393951416016
+0.29036927223205566
+0.2906162738800049
+0.2908768653869629
+0.2911183834075928
+0.29136013984680176
+0.29160022735595703
+0.29184484481811523
+0.29209423065185547
+0.2923400402069092
+0.29259300231933594
+0.29288172721862793
+0.2931368350982666
+0.29339146614074707
+0.2938094139099121
+0.29434776306152344
+0.2946605682373047
+0.29493212699890137
+0.29519224166870117
+0.2954540252685547
+0.29570698738098145
+0.295973539352417
+0.2962167263031006
+0.29645800590515137
+0.2967050075531006
+0.2969474792480469
+0.29718995094299316
+0.2974402904510498
+0.2976865768432617
+0.2979257106781006
+sorted_child_df
+    node_id  parent_id  rank             path
+0         1          1     0                1
+4     10239          1     1          1/10239
+13   131567          1     0         1/131567
+38  2787823          1     0        1/2787823
+39  2787854          1     0        1/2787854
+5     10472      10239    20    1/10239/10472
+6     10474      10239    20    1/10239/10474
+7     10556      10239    22    1/10239/10556
+8     12333      10239     0    1/10239/12333
+9     12429      10239     0    1/10239/12429
+10    12877      10239     7    1/10239/12877
+14   185751      10239    20   1/10239/185751
+15   185752      10239    20   1/10239/185752
+16   186616      10239     0   1/10239/186616
+17   292638      10239    20   1/10239/292638
+18   324686      10239    20   1/10239/324686
+19   423358      10239    20   1/10239/423358
+20   451344      10239     0   1/10239/451344
+21   552364      10239     0   1/10239/552364
+22   573053      10239    20   1/10239/573053
+23   687329      10239    20   1/10239/687329
+24  1232647      10239    22  1/10239/1232647
+25  1232737      10239    20  1/10239/1232737
+26  1458186      10239    20  1/10239/1458186
+27  1511855      10239    20  1/10239/1511855
+28  1993640      10239    20  1/10239/1993640
+29  2080735      10239     7  1/10239/2080735
+30  2169572      10239    20  1/10239/2169572
+31  2559587      10239     7  1/10239/2559587
+32  2560062      10239    20  1/10239/2560062
+33  2731341      10239     7  1/10239/2731341
+34  2731342      10239     7  1/10239/2731342
+35  2732004      10239     7  1/10239/2732004
+36  2732902      10239    20  1/10239/2732902
+37  2732903      10239    20  1/10239/2732903
+40  2840022      10239     7  1/10239/2840022
+41  2840056      10239     9  1/10239/2840056
+42  2842242      10239     7  1/10239/2842242
+43  2946196      10239    20  1/10239/2946196
+44  3044460      10239    20  1/10239/3044460
+45  3044461      10239    20  1/10239/3044461
+46  3044467      10239    20  1/10239/3044467
+47  3044475      10239    20  1/10239/3044475
+1         2     131567     1       1/131567/2
+2      2157     131567     1    1/131567/2157
+3      2759     131567     1    1/131567/2759
+11    12908    2787823     0  1/2787823/12908
+12    28384    2787854     0  1/2787854/28384
+/home/julian/Comp_Research_Tools/evo_programs/taxonomy_smalltree.py:76: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '0           1
+4       10239
+13     131567
+38    2787823
+39    2787854
+5       10472
+6       10474
+7       10556
+8       12333
+9       12429
+10      12877
+14     185751
+15     185752
+16     186616
+17     292638
+18     324686
+19     423358
+20     451344
+21     552364
+22     573053
+23     687329
+24    1232647
+25    1232737
+26    1458186
+27    1511855
+28    1993640
+29    2080735
+30    2169572
+31    2559587
+32    2560062
+33    2731341
+34    2731342
+35    2732004
+36    2732902
+37    2732903
+40    2840022
+41    2840056
+42    2842242
+43    2946196
+44    3044460
+45    3044461
+46    3044467
+47    3044475
+1           2
+2        2157
+3        2759
+11      12908
+12      28384
+Name: node_id, dtype: object' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  sorted_child_df.iloc[:, [0, 1]] = sorted_child_df.iloc[:, [0, 1]].astype(str)
+/home/julian/Comp_Research_Tools/evo_programs/taxonomy_smalltree.py:76: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '0           1
+4           1
+13          1
+38          1
+39          1
+5       10239
+6       10239
+7       10239
+8       10239
+9       10239
+10      10239
+14      10239
+15      10239
+16      10239
+17      10239
+18      10239
+19      10239
+20      10239
+21      10239
+22      10239
+23      10239
+24      10239
+25      10239
+26      10239
+27      10239
+28      10239
+29      10239
+30      10239
+31      10239
+32      10239
+33      10239
+34      10239
+35      10239
+36      10239
+37      10239
+40      10239
+41      10239
+42      10239
+43      10239
+44      10239
+45      10239
+46      10239
+47      10239
+1      131567
+2      131567
+3      131567
+11    2787823
+12    2787854
+Name: parent_id, dtype: object' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  sorted_child_df.iloc[:, [0, 1]] = sorted_child_df.iloc[:, [0, 1]].astype(str)
+sorted_child_df
+    node_id parent_id  rank             path
+0         1      None     0                1
+4     10239         1     1          1/10239
+13   131567         1     0         1/131567
+38  2787823         1     0        1/2787823
+39  2787854         1     0        1/2787854
+5     10472     10239    20    1/10239/10472
+6     10474     10239    20    1/10239/10474
+7     10556     10239    22    1/10239/10556
+8     12333     10239     0    1/10239/12333
+9     12429     10239     0    1/10239/12429
+10    12877     10239     7    1/10239/12877
+14   185751     10239    20   1/10239/185751
+15   185752     10239    20   1/10239/185752
+16   186616     10239     0   1/10239/186616
+17   292638     10239    20   1/10239/292638
+18   324686     10239    20   1/10239/324686
+19   423358     10239    20   1/10239/423358
+20   451344     10239     0   1/10239/451344
+21   552364     10239     0   1/10239/552364
+22   573053     10239    20   1/10239/573053
+23   687329     10239    20   1/10239/687329
+24  1232647     10239    22  1/10239/1232647
+25  1232737     10239    20  1/10239/1232737
+26  1458186     10239    20  1/10239/1458186
+27  1511855     10239    20  1/10239/1511855
+28  1993640     10239    20  1/10239/1993640
+29  2080735     10239     7  1/10239/2080735
+30  2169572     10239    20  1/10239/2169572
+31  2559587     10239     7  1/10239/2559587
+32  2560062     10239    20  1/10239/2560062
+33  2731341     10239     7  1/10239/2731341
+34  2731342     10239     7  1/10239/2731342
+35  2732004     10239     7  1/10239/2732004
+36  2732902     10239    20  1/10239/2732902
+37  2732903     10239    20  1/10239/2732903
+40  2840022     10239     7  1/10239/2840022
+41  2840056     10239     9  1/10239/2840056
+42  2842242     10239     7  1/10239/2842242
+43  2946196     10239    20  1/10239/2946196
+44  3044460     10239    20  1/10239/3044460
+45  3044461     10239    20  1/10239/3044461
+46  3044467     10239    20  1/10239/3044467
+47  3044475     10239    20  1/10239/3044475
+1         2    131567     1       1/131567/2
+2      2157    131567     1    1/131567/2157
+3      2759    131567     1    1/131567/2759
+11    12908   2787823     0  1/2787823/12908
+12    28384   2787854     0  1/2787854/28384
+         node_id  parent_id  rank
+0              1          1     0
+1              2     131567     1
+2              6     335928    22
+3              7          6    26
+4              9      32199    26
+...          ...        ...   ...
+2628046  3379982    1130097    22
+2628047  3380012    1130097    22
+2628048  3380331    1130097    22
+2628049  3380343    1130097    22
+2628050  3380444    1540118    22
+
+[2628051 rows x 3 columns]
+neuer_df
+      node_id  parent_id  rank
+0           1          1     0
+1           2     131567     1
+2           6     335928    22
+3           7          6    26
+4           9      32199    26
+...       ...        ...   ...
+9995    13157       3178    22
+9996    13158      13157    26
+9997    13159      82115    22
+9998    13160      41275    26
+9999    13163      33386    22
+
+[10000 rows x 3 columns]
+aktualisiert
+      node_id  parent_id  rank
+0           1          1     0
+1           2     131567     1
+2           6     335928    22
+3           7          6    26
+4           9      32199    26
+...       ...        ...   ...
+9995    13157       3178    22
+9996    13158      13157    26
+9997    13159      82115    22
+9998    13160      41275    26
+9999    13163      33386    22
+
+[10000 rows x 3 columns]
+largerchild_df
+         node_id parent_id  rank
+0              1         1     0
+1              2    131567     1
+998         1297         2     6
+1697        2157    131567     1
+1832        2323         2     0
+...          ...       ...   ...
+2627771  3376960     12333    26
+2627772  3376961     12333    26
+2627793  3377015     12333    26
+2627804  3377094     12333    26
+2628027  3379134         2     2
+
+[5075 rows x 3 columns]
+/home/julian/Comp_Research_Tools/evo_programs/taxonomy_smalltree.py:103: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  largerchild_df[cols] = largerchild_df[cols].astype(str)
+largerchild_df
+         node_id parent_id  rank
+0              1      None     0
+1              2    131567     1
+998         1297         2     6
+1697        2157    131567     1
+1832        2323         2     0
+...          ...       ...   ...
+2627771  3376960     12333    26
+2627772  3376961     12333    26
+2627793  3377015     12333    26
+2627804  3377094     12333    26
+2628027  3379134         2     2
+
+[5075 rows x 3 columns]
+done
+[Sun Mar  2 16:10:07 2025]
+Finished job 5.
+3 of 5 steps (60%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Mar  2 16:10:07 2025]
+localrule tree_indices:
+    input: evo_data/results/ncbitree.pickle, evo_data/results/species_cleaned.txt, evo_data/species_EnsemblVertebrates.txt, evo_data/results/nodes_copy.tsv, evo_data/names.dmp
+    output: evo_data/results/index_genomes_df.tsv, evo_data/results/nodes_sum_table.tsv
+    jobid: 4
+    reason: Missing output files: evo_data/results/index_genomes_df.tsv; Input files updated by another job: evo_data/results/nodes_copy.tsv, evo_data/results/ncbitree.pickle, evo_data/results/species_cleaned.txt
+    resources: tmpdir=/tmp
+
+                        node_id assembly_accession
+Spiny chromis             80966    GCA_002109545.1
+Eurasian sparrowhawk     211598    GCA_004320145.1
+Giant panda                9646    GCA_002007445.2
+Yellow-billed parrot     241587    GCA_003947215.1
+Midas cichlid             61819    GCA_000751415.1
+...                         ...                ...
+Monterrey platyfish       32473    GCA_001444195.1
+Platyfish                  8083    GCA_002775205.2
+California sea lion        9704    GCA_009762305.1
+White-throated sparrow    44394    GCA_000385455.1
+Silver-eye              1220523    GCA_001281735.1
+
+[342 rows x 2 columns]
+                                                    node_id assembly_accession
+[Actinobacillus] rossii (GCA_900444965)              123820    GCA_900444965.1
+[Arcobacter] porcinus str. 117434 (GCA_001695265)   1935204    GCA_001695265.1
+[Bacillus] caldolyticus str. reborg#228 (GCA_00...     1394    GCA_003595605.1
+[Bacillus] selenitireducens MLS10 str. MLS-10 (...   439292    GCA_000093085.1
+[Bacillus] sp. KCTC 13219 (GCA_001592865)           1811976    GCA_001592865.1
+...                                                     ...                ...
+Trypanosoma cruzi marinkellei (GCA_000300495.1)       85056    GCA_000300495.1
+Trypanosoma equiperdum (GCA_001457755.2)               5694    GCA_001457755.2
+Trypanosoma rangeli (GCA_003719475.1)                  5698    GCA_003719475.1
+Trypanosoma rangeli SC58 (GCA_000492115.1)           429131    GCA_000492115.1
+Trypanosoma theileri (GCA_002087225.1)                67003    GCA_002087225.1
+
+[33589 rows x 2 columns]
+       node_id assembly_accession
+0       123820    GCA_900444965.1
+1      1935204    GCA_001695265.1
+2         1394    GCA_003595605.1
+3       439292    GCA_000093085.1
+4      1811976    GCA_001592865.1
+...        ...                ...
+33926    32473    GCA_001444195.1
+33927     8083    GCA_002775205.2
+33928     9704    GCA_009762305.1
+33929    44394    GCA_000385455.1
+33930  1220523    GCA_001281735.1
+
+[33931 rows x 2 columns]
+all_nodes_df_indexed
+       node_id assembly_accession
+0       123820    GCA_900444965.1
+1      1935204    GCA_001695265.1
+2         1394    GCA_003595605.1
+3       439292    GCA_000093085.1
+4      1811976    GCA_001592865.1
+...        ...                ...
+33926    32473    GCA_001444195.1
+33927     8083    GCA_002775205.2
+33928     9704    GCA_009762305.1
+33929    44394    GCA_000385455.1
+33930  1220523    GCA_001281735.1
+
+[33931 rows x 2 columns]
+genomes_df
+1228
+       node_id  at_node
+0          573     1228
+1          562     1064
+2          210      413
+3         1313      239
+4          470      238
+...        ...      ...
+22419     1462        1
+22420  1337888        1
+22421  1921421        1
+22422   483547        1
+22423  1963025        1
+
+[22424 rows x 2 columns]
+type of node_id genomes_df
+object
+<class 'str'>
+type of node_id nodes_df
+object
+1
+nodes_df
+         node_id  parent_id  rank  at_node
+0              1          1     0        0
+1              2     131567     1        0
+2              6     335928    22        0
+3              7          6    26        0
+4              9      32199    26        0
+...          ...        ...   ...      ...
+2628046  3379982    1130097    22        0
+2628047  3380012    1130097    22        0
+2628048  3380331    1130097    22        0
+2628049  3380343    1130097    22        0
+2628050  3380444    1540118    22        0
+
+[2628051 rows x 4 columns]
+length index_df 33814
+index_genomes_df
+       node_id assembly_accession
+0       123820    GCA_900444965.1
+1      1935204    GCA_001695265.1
+2         1394    GCA_003595605.1
+3       439292    GCA_000093085.1
+4      1811976    GCA_001592865.1
+...        ...                ...
+33926    32473    GCA_001444195.1
+33927     8083    GCA_002775205.2
+33928     9704    GCA_009762305.1
+33929    44394    GCA_000385455.1
+33930  1220523    GCA_001281735.1
+
+[33814 rows x 2 columns]
+         node_id                                              names      additional_info      specificity somethingelse
+0              1                                                all                               synonym
+1              1                                               root                       scientific name
+2              2                                           Bacteria  Bacteria <bacteria>  scientific name
+3              2                                           bacteria                            blast name
+4              2                     "Bacteria" Cavalier-Smith 1987                             authority
+...          ...                                                ...                  ...              ...           ...
+4222372  3380331  Aulaxinella Xavier-Leite, M. Caceres & Lucking...                             authority
+4222373  3380343                                       Bezerroplaca                       scientific name
+4222374  3380343  Bezerroplaca Xavier-Leite, M. Caceres & Luckin...                             authority
+4222375  3380444                                     Aquilariomyces                       scientific name
+4222376  3380444  Aquilariomyces T. Y. Du, Tibpromma & Karun., 2024                             authority
+
+[4222377 rows x 5 columns]
+names_df just read in
+         node_id                                              names      additional_info      specificity somethingelse
+0              1                                                all                               synonym
+1              1                                               root                       scientific name
+2              2                                           Bacteria  Bacteria <bacteria>  scientific name
+3              2                                           bacteria                            blast name
+4              2                     "Bacteria" Cavalier-Smith 1987                             authority
+...          ...                                                ...                  ...              ...           ...
+4222372  3380331  Aulaxinella Xavier-Leite, M. Caceres & Lucking...                             authority
+4222373  3380343                                       Bezerroplaca                       scientific name
+4222374  3380343  Bezerroplaca Xavier-Leite, M. Caceres & Luckin...                             authority
+4222375  3380444                                     Aquilariomyces                       scientific name
+4222376  3380444  Aquilariomyces T. Y. Du, Tibpromma & Karun., 2024                             authority
+
+[4222377 rows x 5 columns]
+names_df just scientific name
+         node_id                     names      additional_info      specificity somethingelse
+1              1                      root                       scientific name
+2              2                  Bacteria  Bacteria <bacteria>  scientific name
+17             6              Azorhizobium                       scientific name
+20             7  Azorhizobium caulinodans                       scientific name
+32             9       Buchnera aphidicola                       scientific name
+...          ...                       ...                  ...              ...           ...
+4222367  3379982                Vezdamyces                       scientific name
+4222369  3380012                Caleniella                       scientific name
+4222371  3380331               Aulaxinella                       scientific name
+4222373  3380343              Bezerroplaca                       scientific name
+4222375  3380444            Aquilariomyces                       scientific name
+
+[2628051 rows x 5 columns]
+names_df only node_id and names
+         node_id                     names
+1              1                      root
+2              2                  Bacteria
+17             6              Azorhizobium
+20             7  Azorhizobium caulinodans
+32             9       Buchnera aphidicola
+...          ...                       ...
+4222367  3379982                Vezdamyces
+4222369  3380012                Caleniella
+4222371  3380331               Aulaxinella
+4222373  3380343              Bezerroplaca
+4222375  3380444            Aquilariomyces
+
+[2628051 rows x 2 columns]
+names_df
+         node_id                     names
+0              1                      root
+1              2                  Bacteria
+2              6              Azorhizobium
+3              7  Azorhizobium caulinodans
+4              9       Buchnera aphidicola
+...          ...                       ...
+2628046  3379982                Vezdamyces
+2628047  3380012                Caleniella
+2628048  3380331               Aulaxinella
+2628049  3380343              Bezerroplaca
+2628050  3380444            Aquilariomyces
+
+[2628051 rows x 2 columns]
+index_genomes_df with names
+       node_id assembly_accession                              names
+0       123820    GCA_900444965.1            [Actinobacillus] rossii
+1      1935204    GCA_001695265.1                Arcobacter porcinus
+2         1394    GCA_003595605.1            [Bacillus] caldolyticus
+3       439292    GCA_000093085.1  [Bacillus] selenitireducens MLS10
+4      1811976    GCA_001592865.1          [Bacillus] sp. KCTC 13219
+...        ...                ...                                ...
+33926    32473    GCA_001444195.1             Xiphophorus couchianus
+33927     8083    GCA_002775205.2              Xiphophorus maculatus
+33928     9704    GCA_009762305.1             Zalophus californianus
+33929    44394    GCA_000385455.1             Zonotrichia albicollis
+33930  1220523    GCA_001281735.1       Zosterops lateralis melanops
+
+[33814 rows x 3 columns]
+df_merged
+         node_id  parent_id  rank  at_node_x  at_node_y
+0              1          1     0          0        NaN
+1              2     131567     1          0        NaN
+2              6     335928    22          0        NaN
+3              7          6    26          0        NaN
+4              9      32199    26          0        NaN
+...          ...        ...   ...        ...        ...
+2628046  3379982    1130097    22          0        NaN
+2628047  3380012    1130097    22          0        NaN
+2628048  3380331    1130097    22          0        NaN
+2628049  3380343    1130097    22          0        NaN
+2628050  3380444    1540118    22          0        NaN
+
+[2628051 rows x 5 columns]
+time to traverse whole tree: 1.9956800937652588
+nodes_df
+         node_id  parent_id  rank  at_node  sum_node  start_index  end_index
+0              1          1     0      0.0       0.0          0.0        0.0
+1              2     131567     1      0.0       0.0          0.0        0.0
+2              6     335928    22      0.0       0.0          0.0        0.0
+3              7          6    26      0.0       0.0          0.0        0.0
+4              9      32199    26      0.0       0.0          0.0        0.0
+...          ...        ...   ...      ...       ...          ...        ...
+2628046  3379982    1130097    22      0.0       0.0          0.0        0.0
+2628047  3380012    1130097    22      0.0       0.0          0.0        0.0
+2628048  3380331    1130097    22      0.0       0.0          0.0        0.0
+2628049  3380343    1130097    22      0.0       0.0          0.0        0.0
+2628050  3380444    1540118    22      0.0       0.0          0.0        0.0
+
+[2628051 rows x 7 columns]
+       node_id assembly_accession                              names
+0       123820    GCA_900444965.1            [Actinobacillus] rossii
+1      1935204    GCA_001695265.1                Arcobacter porcinus
+2         1394    GCA_003595605.1            [Bacillus] caldolyticus
+3       439292    GCA_000093085.1  [Bacillus] selenitireducens MLS10
+4      1811976    GCA_001592865.1          [Bacillus] sp. KCTC 13219
+...        ...                ...                                ...
+33926    32473    GCA_001444195.1             Xiphophorus couchianus
+33927     8083    GCA_002775205.2              Xiphophorus maculatus
+33928     9704    GCA_009762305.1             Zalophus californianus
+33929    44394    GCA_000385455.1             Zonotrichia albicollis
+33930  1220523    GCA_001281735.1       Zosterops lateralis melanops
+
+[33814 rows x 3 columns]
+[Sun Mar  2 16:10:22 2025]
+Finished job 4.
+4 of 5 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Sun Mar  2 16:10:22 2025]
+localrule all:
+    input: evo_data/results/nodes_copy.tsv, evo_data/results/ncbi_rank_dict.tsv, evo_data/results/species_cleaned.txt, evo_data/results/index_genomes_df.tsv, evo_data/results/ncbitree.pickle
+    jobid: 0
+    reason: Input files updated by another job: evo_data/results/nodes_copy.tsv, evo_data/results/species_cleaned.txt, evo_data/results/index_genomes_df.tsv, evo_data/results/ncbi_rank_dict.tsv, evo_data/results/ncbitree.pickle
+    resources: tmpdir=/tmp
+
+[Sun Mar  2 16:10:22 2025]
+Finished job 0.
+5 of 5 steps (100%) done
+Complete log: .snakemake/log/2025-03-02T160958.666416.snakemake.log
